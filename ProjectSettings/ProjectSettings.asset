@@ -4,7 +4,7 @@
 PlayerSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 28
-  productGUID: 497c14cef25ee3d429f560983d56ace9
+  productGUID: a2a1a5f5a9dd1924894f08dfd8ac0718
   AndroidProfiler: 0
   AndroidFilterTouchesWhenObscured: 0
   AndroidEnableSustainedPerformanceMode: 0
@@ -13,7 +13,7 @@ PlayerSettings:
   useOnDemandResources: 0
   accelerometerFrequency: 60
   companyName: DefaultCompany
-  productName: First
+  productName: My project (15)
   defaultCursor: {fileID: 0}
   cursorHotspot: {x: 0, y: 0}
   m_SplashScreenBackgroundColor: {r: 0.13725491, g: 0.12156863, b: 0.1254902, a: 1}
@@ -145,7 +145,8 @@ PlayerSettings:
   visionOSBundleVersion: 1.0
   tvOSBundleVersion: 1.0
   bundleVersion: 1.0
-  preloadedAssets: []
+  preloadedAssets:
+  - {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
   metroInputSource: 0
   wsaTransparentSwapchain: 0
   m_HolographicPauseOnTrackingLoss: 1
@@ -389,7 +390,10 @@ PlayerSettings:
       m_Height: 36
       m_Kind: 0
       m_SubKind: 
-  m_BuildTargetBatching: []
+  m_BuildTargetBatching:
+  - m_BuildTarget: Standalone
+    m_StaticBatching: 1
+    m_DynamicBatching: 0
   m_BuildTargetShaderSettings: []
   m_BuildTargetGraphicsJobs: []
   m_BuildTargetGraphicsJobMode: []
@@ -697,14 +701,14 @@ PlayerSettings:
   editorAssembliesCompatibilityLevel: 1
   m_RenderingPath: 1
   m_MobileRenderingPath: 1
-  metroPackageName: First
+  metroPackageName: My project (15)
   metroPackageVersion: 
   metroCertificatePath: 
   metroCertificatePassword: 
   metroCertificateSubject: 
   metroCertificateIssuer: 
   metroCertificateNotAfter: 0000000000000000
-  metroApplicationDescription: First
+  metroApplicationDescription: My project (15)
   wsaImages: {}
   metroTileShortName: 
   metroTileShowName: 0
@@ -775,10 +779,10 @@ PlayerSettings:
   captureStartupLogs: {}
   activeInputHandler: 1
   windowsGamepadBackendHint: 0
-  cloudProjectId: f0084bb6-b287-4c64-94e8-7c0b1cc20cff
+  cloudProjectId: f8f271da-517f-4366-9729-15b6dde3bd70
   framebufferDepthMemorylessMode: 0
   qualitySettingsNames: []
-  projectName: First
+  projectName: My project (15)
   organizationId: dadhkjas123
   cloudEnabled: 0
   legacyClampBlendShapeWeights: 0
