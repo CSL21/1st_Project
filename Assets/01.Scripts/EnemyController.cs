@@ -105,7 +105,7 @@ public class EnemyController : MonoBehaviour
         if (!collision.gameObject.CompareTag("Player")) return;
         if (Time.time < lastDamageTime + damageCooldown) return;
 
-        PlayerController player = collision.gameObject.GetComponent<PlayerController>();
+        PlayerStatus player = collision.gameObject.GetComponent<PlayerStatus>();
         if (player != null)
         {
             player.TakeDamage(touchDamage);

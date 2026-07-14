@@ -5,7 +5,17 @@ public class SceneChanger : MonoBehaviour
 {
     public void ClickStart()
     {
+        SceneManager.LoadScene("FieldScene");
+    }
+
+    public void ClickGame()
+    {
         SceneManager.LoadScene("GameScene");
+    }
+
+    public void ClickReturn()
+    {
+        SceneManager.LoadScene("MainScene");
     }
 
     public void ClickExit()

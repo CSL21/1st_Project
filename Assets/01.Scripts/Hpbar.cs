@@ -12,7 +12,7 @@ public class HPBar : MonoBehaviour
     float gauge;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    private void Start()
     {
         img = GetComponent<Image>();
     }
@@ -24,7 +24,7 @@ public class HPBar : MonoBehaviour
 
         transform.position = target.position + offset;
 
-        PlayerController player = target.GetComponent<PlayerController>();
+        PlayerStatus player = target.GetComponent<PlayerStatus>();
         if (player != null && img != null)
         {
             img.fillAmount = player.GetHPPercent();

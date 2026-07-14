@@ -12,20 +12,14 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField] float moveSpeed;
     [SerializeField] float jumpPower;
-    [SerializeField] TextMeshProUGUI DiedText;
+    [SerializeField] LayerMask groundLayer;
 
     float dir;
     bool isGround;
     int jumpCount;
     int jumpCountMax;
-
-    [SerializeField] LayerMask groundLayer;
     int isRun;
     int isJump;
-
-    [Header("Health")]
-    [SerializeField] private int maxHealth = 100;
-    private int currentHealth;
 
     private void Awake()
     {
@@ -41,8 +35,6 @@ public class PlayerController : MonoBehaviour
         jumpCountMax = 2;
         isRun = Animator.StringToHash("isRun");
         isJump = Animator.StringToHash("isJump");
-
-        currentHealth = maxHealth;
     }
 
     void Update()
@@ -104,42 +96,6 @@ public class PlayerController : MonoBehaviour
         else jumpCount += 2;
 
         animator.SetBool(isJump, true);
-    }
-
-
-    public void TakeDamage(int damage)
-    {
-        currentHealth -= damage;
-        Debug.Log($"{damage}의 데미지를 입었습니다! 남은 체력: {currentHealth}");
-
-        if (currentHealth <= 0)
-        {
-            Die();
-        }
-    }
-
-    private void Die()
-    {
-
-        if (DiedText != null)
-        {
-            DiedText.text = "You Died!";
-            DiedText.gameObject.SetActive(true);
-        }
-
-        Debug.Log("죽었습니다!");
-        this.enabled = false;
-        Invoke("GoMain", 3f);
-    }
-
-    private void GoMain()
-    {
-        SceneManager.LoadScene("MainScene");
-    }
-
-    public float GetHPPercent()
-    {
-        return (float)currentHealth / maxHealth;
     }
 
     private void OnDrawGizmos()

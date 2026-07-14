@@ -1,8 +1,18 @@
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+
+public enum BGMType
+{
+    MainScene,
+    FieldScene,
+    GameScene,
+}
 
 public enum SFXType
 {
+    Bullet,
     Arrow,
     Die,
     Attack,
@@ -30,11 +40,8 @@ public class SoundManager : MonoBehaviour
         DontDestroyOnLoad(gameObject);
     }
 
-
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        //PlayBGM();
 
     }
 
@@ -51,7 +58,6 @@ public class SoundManager : MonoBehaviour
 
         sfxAudioSource.PlayOneShot(soundClip[(int)type]);
     }
-
     IEnumerator BGMChange()
     {
         float vol = bgmAudioSource.volume;
@@ -70,6 +76,6 @@ public class SoundManager : MonoBehaviour
 
         // 새로운 bgm으로 바꿔서
         // 점점 볼륨을 높임
-    }
 
+    }
 }
