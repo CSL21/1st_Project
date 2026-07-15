@@ -27,6 +27,6 @@ public class GoalObject : MonoBehaviour
     {
         yield return new WaitForSeconds(3f);
 
-        SceneManager.LoadScene("FieldScene");
+        SceneManager.LoadScene("LobbyScene");
     }
 }

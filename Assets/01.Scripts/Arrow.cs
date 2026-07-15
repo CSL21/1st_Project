@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Arrow : MonoBehaviour
 {
@@ -23,6 +24,7 @@ public class Arrow : MonoBehaviour
     private void OnEnable()
     {
         timer = 0f;
+        SceneManager.sceneLoaded += OnSceneLoaded;
     }
 
     // Update is called once per frame
@@ -43,7 +45,7 @@ public class Arrow : MonoBehaviour
 
     public void SetDamage()
     {
-       totalDamage = arrowDamage + PlayerStatus.instance.BaseDamage;
+        totalDamage = arrowDamage + PlayerStatus.instance.BaseDamage;
     }
 
     public void OnCollisionEnter2D(Collision2D collision)
@@ -66,5 +68,16 @@ public class Arrow : MonoBehaviour
         SoundManager.instance.PlaySFX(SFXType.Arrow);
         ObjectPoolManager.instance.ReturnObject("Arrow", this.gameObject);
     }
+    private void OnDisable()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
 
+    private void OnSceneLoaded(Scene Scene, LoadSceneMode mode)
+    {
+        if (Scene.name == "LobbyScene" || Scene.name == "MainScene")
+        {
+            ObjectPoolManager.instance.ReturnObject("Arrow", this.gameObject);
+        }
+    }
 }

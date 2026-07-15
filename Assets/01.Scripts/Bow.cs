@@ -4,7 +4,6 @@ using UnityEngine.InputSystem;
 public class Bow : Weapon
 {
     [SerializeField] Transform firePosition;
-
     [SerializeField] GameObject Arrow;
 
 
@@ -20,14 +19,12 @@ public class Bow : Weapon
         }
     }
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
     protected override void Start()
     {
         base.Start();
         camera = Camera.main;
     }
 
-    // Update is called once per frame
     void Update()
     {
         LookMouse();

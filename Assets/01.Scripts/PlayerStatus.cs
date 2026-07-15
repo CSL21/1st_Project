@@ -13,6 +13,7 @@ public class PlayerStatus : MonoBehaviour
         if (instance == null)
         {
             instance = this;
+            DontDestroyOnLoad(gameObject);
         }
         else
         {
@@ -21,20 +22,64 @@ public class PlayerStatus : MonoBehaviour
     }
 
 
-        [Header("Health")]
-
+    [Header("Health")]
     [SerializeField] TextMeshProUGUI DiedText;
-    [SerializeField] private int maxHealth = 100;
 
+
+    [Header("Player Info")]
+    private int maxHealth = 200;
+    public int currentHealth = 100;
     public float BaseDamage = 10f;
     public float AttackSpeed = 1.0f;
 
+    [Header("Gold and Point")]
+    public int Gold = 500;
+    public int StatPoint = 10;
+
+    private void RefreshLobbyUI()
+    {
+        UIManager uiManager = Object.FindFirstObjectByType<UIManager>();
+        if (uiManager != null)
+        {
+            uiManager.UpdateLobbyUI();
+        }
+    }
+
+
+    public void ClickHp()
+    {
+        if (StatPoint > 0)
+        {
+            StatPoint--;
+            currentHealth += 20;
+            RefreshLobbyUI();
+        }
+    }
+
+    public void ClickATK()
+    {
+        if (StatPoint > 0)
+        {
+            StatPoint--;
+            BaseDamage += 1f;
+            RefreshLobbyUI();
+        }
+    }
+
+    public void ClickATS()
+    {
+        SceneManager.LoadScene("MainScene");
+        if (StatPoint > 0)
+        {
+            StatPoint--;
+            AttackSpeed += 0.1f;
+            RefreshLobbyUI();
+        }
+    }
 
 
 
 
-
-    private int currentHealth;
 
     public float GetHPPercent()
     {
@@ -73,6 +118,6 @@ public class PlayerStatus : MonoBehaviour
 
     private void GoMain()
     {
-        SceneManager.LoadScene("MainScene");
+        SceneManager.LoadScene("LobbyScene");
     }
 }
