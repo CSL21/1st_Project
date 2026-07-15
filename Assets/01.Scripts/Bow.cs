@@ -7,6 +7,7 @@ public class Bow : Weapon
 
     [SerializeField] GameObject Arrow;
 
+
     protected override void Attack()
     {
         if (Mouse.current.leftButton.wasPressedThisFrame && canAttack)
@@ -14,7 +15,7 @@ public class Bow : Weapon
             GameObject arr = ObjectPoolManager.instance.GetObject("Arrow");
             arr.transform.position = firePosition.position;
             arr.transform.rotation = transform.rotation;
-            arr.GetComponent<Arrow>().SetDamage(5);
+            arr.GetComponent<Arrow>().SetDamage();
             canAttack = false;
         }
     }

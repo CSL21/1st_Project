@@ -1,15 +1,38 @@
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 
 public class PlayerStatus : MonoBehaviour
 {
 
-    [Header("Health")]
+    public static PlayerStatus instance;
+
+    private void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
+
+
+        [Header("Health")]
 
     [SerializeField] TextMeshProUGUI DiedText;
     [SerializeField] private int maxHealth = 100;
+
+    public float BaseDamage = 10f;
+    public float AttackSpeed = 1.0f;
+
+
+
+
+
 
     private int currentHealth;
 

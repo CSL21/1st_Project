@@ -69,7 +69,7 @@ public class EnemyController : MonoBehaviour
         return transform.position.x > target.position.x ? true : false;
     }
 
-    public void TakeDamage(int damage)
+    public void TakeDamage(float damage)
     {
         nowHP -= damage;
 

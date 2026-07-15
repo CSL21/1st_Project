@@ -6,7 +6,7 @@ public abstract class Weapon : MonoBehaviour
 {
     protected Camera camera;
 
-    [SerializeField] protected int damage;
+    [SerializeField] protected float damage;
 
     [SerializeField] float delay = 1f;
 

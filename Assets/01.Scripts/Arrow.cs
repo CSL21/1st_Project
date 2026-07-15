@@ -3,12 +3,14 @@ using UnityEngine;
 public class Arrow : MonoBehaviour
 {
     [SerializeField] float speed = 5f;
+    [SerializeField] float totalDamage = 5f;
+    public float arrowDamage = 10f;
+
     float lifeTime;
 
     float timer;
 
     Rigidbody2D rb;
-    int damage;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -39,12 +41,12 @@ public class Arrow : MonoBehaviour
         rb.linearVelocity = transform.right * speed;
     }
 
-    public void SetDamage(int dmg)
+    public void SetDamage()
     {
-        damage = dmg;
+       totalDamage = arrowDamage + PlayerStatus.instance.BaseDamage;
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    public void OnCollisionEnter2D(Collision2D collision)
     {
         //if(collision.gameObject.layer==6) // Wall
         if (collision.gameObject.layer == LayerMask.NameToLayer("Wall"))
@@ -54,8 +56,8 @@ public class Arrow : MonoBehaviour
         else if (collision.gameObject.layer == LayerMask.NameToLayer("Enemy"))
         {
             ReturnPool();
-            // 몬스터 체력 감소
-            collision.gameObject.GetComponent<EnemyController>().TakeDamage(damage);
+            collision.gameObject.GetComponent<EnemyController>().TakeDamage(totalDamage);
+            Debug.Log($"데미지 {totalDamage} ");
         }
     }
 

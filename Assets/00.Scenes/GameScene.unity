@@ -3314,6 +3314,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Arrow
   speed: 5
+  totalDamage: 0
+  arrowDamage: 10
 --- !u!50 &763603469
 Rigidbody2D:
   serializedVersion: 5
@@ -4691,6 +4693,7 @@ GameObject:
   - component: {fileID: 1177191851}
   - component: {fileID: 1177191850}
   - component: {fileID: 1177191852}
+  - component: {fileID: 1177191853}
   m_Layer: 7
   m_Name: Player
   m_TagString: Player
@@ -4882,11 +4885,25 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayerController
   moveSpeed: 5
   jumpPower: 10
-  DiedText: {fileID: 577825115}
   groundLayer:
     serializedVersion: 2
     m_Bits: 64
+--- !u!114 &1177191853
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1177191846}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1464444d48c0b3a4c854faf96f8219de, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerStatus
+  DiedText: {fileID: 0}
   maxHealth: 100
+  BaseDamage: 10
+  AttackSpeed: 1
 --- !u!1 &1242467708
 GameObject:
   m_ObjectHideFlags: 0
