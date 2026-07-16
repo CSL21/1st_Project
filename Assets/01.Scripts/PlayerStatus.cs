@@ -36,9 +36,13 @@ public class PlayerStatus : MonoBehaviour
     public int Gold = 500;
     public int StatPoint = 10;
 
+    [Header("Weapon")]
+    public Transform weaponContainer;
+    public GameObject currentWeaponObject;
+
     private void RefreshLobbyUI()
     {
-        UIManager uiManager = Object.FindFirstObjectByType<UIManager>();
+        UIManager uiManager = Object.FindAnyObjectByType<UIManager>();
         if (uiManager != null)
         {
             uiManager.UpdateLobbyUI();
@@ -46,35 +50,34 @@ public class PlayerStatus : MonoBehaviour
     }
 
 
-    public void ClickHp()
+    public bool TryUpgradeHp()
     {
-        if (StatPoint > 0)
-        {
-            StatPoint--;
-            currentHealth += 20;
-            RefreshLobbyUI();
-        }
+        if (StatPoint <= 0)
+            return false;
+
+        StatPoint--;
+        currentHealth += 20;
+        return true;
     }
 
-    public void ClickATK()
+    public bool TryUpgradeAtk()
     {
-        if (StatPoint > 0)
-        {
-            StatPoint--;
-            BaseDamage += 1f;
-            RefreshLobbyUI();
-        }
+        if (StatPoint <= 0)
+            return false;
+
+        StatPoint--;
+        BaseDamage += 1f;
+        return true;
     }
 
-    public void ClickATS()
+    public bool TryUpgradeAts()
     {
-        SceneManager.LoadScene("MainScene");
-        if (StatPoint > 0)
-        {
-            StatPoint--;
-            AttackSpeed += 0.1f;
-            RefreshLobbyUI();
-        }
+        if (StatPoint <= 0)
+            return false;
+
+        StatPoint--;
+        AttackSpeed += 0.1f;
+        return true;
     }
 
 
@@ -119,5 +122,27 @@ public class PlayerStatus : MonoBehaviour
     private void GoMain()
     {
         SceneManager.LoadScene("LobbyScene");
+    }
+
+    public void EquipWeaponPrefab(GameObject weaponPrefab)
+    {
+        if (weaponPrefab == null) return;
+
+        if (weaponContainer == null)
+        {
+            weaponContainer = this.transform;
+        }
+
+        if (currentWeaponObject != null)
+        {
+            Destroy(currentWeaponObject);
+        }
+
+        currentWeaponObject = Instantiate(weaponPrefab, weaponContainer);
+
+        currentWeaponObject.transform.localPosition = Vector3.zero;
+        currentWeaponObject.transform.localRotation = Quaternion.identity;
+
+        Debug.Log($"[PlayerStatus] 새 무기({weaponPrefab.name}) 실시간 생성 및 장착 완료!");
     }
 }
