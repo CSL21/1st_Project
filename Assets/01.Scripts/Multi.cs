@@ -6,7 +6,8 @@ using System.Collections;
 public class Multi : Weapon
 {
     [SerializeField] Transform firePosition;
-    [SerializeField] GameObject Bullet;
+
+    [SerializeField] GameObject projectile;
 
     [Header("Multi Settings")]
     [SerializeField] private int arrowCount = 3;
@@ -28,14 +29,14 @@ public class Multi : Weapon
 
         for (int i = 0; i < arrowCount; i++)
         {
-            GameObject arr = ObjectPoolManager.instance.GetObject("Arrow");
+            GameObject arr = ObjectPoolManager.instance.GetObject(projectile.name);
             if (arr != null)
             {
                 arr.transform.position = firePosition.position;
                 float currentSpreadAngle = startAngle + (i * spreadAngle);
                 Quaternion spreadRotation = transform.rotation * Quaternion.Euler(0, 0, currentSpreadAngle);
                 arr.transform.rotation = spreadRotation;
-                arr.GetComponent<Bullet>().SetDamage(5);
+                arr.GetComponent<Arrow>().SetDamage();
             }
         }
     }

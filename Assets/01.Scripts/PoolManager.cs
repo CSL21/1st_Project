@@ -34,6 +34,9 @@ public class ObjectPoolManager : MonoBehaviour
             for (int i = 0; i < poolSize; i++)
             {
                 GameObject go = Instantiate(obj); //
+
+                go.name = obj.name;
+
                 go.transform.SetParent(parentPool.transform);
                 go.transform.rotation = obj.transform.rotation; //
                 go.SetActive(false);

@@ -6,7 +6,7 @@ using System.Collections;
 public class Burst : Weapon
 {
     [SerializeField] Transform firePosition;
-    [SerializeField] GameObject Bullet;
+    [SerializeField] GameObject Arrow;
 
     [Header("Burst Settings")]
     [SerializeField] private int burstCount = 3;
@@ -29,7 +29,7 @@ public class Burst : Weapon
 
         for (int i = 0; i < burstCount; i++)
         {
-            GameObject arr = ObjectPoolManager.instance.GetObject("Bullet");
+            GameObject arr = ObjectPoolManager.instance.GetObject("Arrow");
             if (arr != null)
             {
                 arr.transform.position = firePosition.position;

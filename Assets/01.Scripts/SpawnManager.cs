@@ -1,16 +1,18 @@
 using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class SpawnManager : MonoBehaviour
 {
     [Header("Spawn Settings")]
-    [SerializeField] private string enemyPoolName = "Enemy_Goblin";
+    [SerializeField] private List<string> enemyPoolNames = new List<string>() { "Enemy_Goblin" };
     [SerializeField] private float spawnInterval = 3f;
     [SerializeField] private int maxEnemyCount = 10;
 
     [Header("Spawn Position")]
     [SerializeField] private float spawnXPosition = 15f;
-    [SerializeField] private float fixedYPosition = -4.2f;
+
+    [SerializeField] private List<float> fixedYPositions = new List<float>() { -4.2f };
     [SerializeField] private float maxSpawnPlayerX = 80f;
 
     private Transform playerTransform;
@@ -72,17 +74,26 @@ public class SpawnManager : MonoBehaviour
     private void SpawnEnemy()
     {
         if (playerTransform == null) return;
+        if (enemyPoolNames.Count == 0 || fixedYPositions.Count == 0) return;
 
-        GameObject enemy = ObjectPoolManager.instance.GetObject(enemyPoolName);
+        int randomEnemyIndex = Random.Range(0, enemyPoolNames.Count);
+        string selectedEnemyPool = enemyPoolNames[randomEnemyIndex];
+
+        GameObject enemy = ObjectPoolManager.instance.GetObject(selectedEnemyPool);
+
         if (enemy != null)
         {
             float calculatedX = playerTransform.position.x + spawnXPosition;
 
-            Vector3 spawnPos = new Vector3(calculatedX, fixedYPosition, 0f);
+            int randomYIndex = Random.Range(0, fixedYPositions.Count);
+            float selectedYPosition = fixedYPositions[randomYIndex];
+
+            Vector3 spawnPos = new Vector3(calculatedX, selectedYPosition, 0f);
 
             enemy.transform.position = spawnPos;
         }
     }
+
 
     private int CountAliveEnemies()
     {

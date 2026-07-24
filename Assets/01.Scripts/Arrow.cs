@@ -3,12 +3,16 @@ using UnityEngine.SceneManagement;
 
 public class Arrow : MonoBehaviour
 {
+
+    [SerializeField] private string poolKey = "Arrow";
     [SerializeField] float speed = 5f;
-    [SerializeField] float totalDamage = 5f;
-    public float arrowDamage = 10f;
+    [SerializeField] float totalDamage = 0f;
+    [SerializeField] float arrowDamage = 10f;
+    [SerializeField] private bool isPiercing = false;
+    [SerializeField] private int pierceCount = 1;
 
+    private int currentPierceCount;
     float lifeTime;
-
     float timer;
 
     Rigidbody2D rb;
@@ -16,7 +20,7 @@ public class Arrow : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        lifeTime = 3f;
+        lifeTime = 2f;
         timer = 0f;
         rb = GetComponent<Rigidbody2D>();
     }
@@ -60,13 +64,28 @@ public class Arrow : MonoBehaviour
             ReturnPool();
             collision.gameObject.GetComponent<EnemyController>().TakeDamage(totalDamage);
             Debug.Log($"µ¥¹ÌÁö {totalDamage} ");
+
+            if (isPiercing)
+            {
+                currentPierceCount--;
+                if (currentPierceCount <= 0)
+                {
+                    ReturnPool();
+                }
+            }
+            else
+            {
+                ReturnPool();
+            }
         }
+
+
     }
 
     void ReturnPool()
     {
         SoundManager.instance.PlaySFX(SFXType.Arrow);
-        ObjectPoolManager.instance.ReturnObject("Arrow", this.gameObject);
+        ObjectPoolManager.instance.ReturnObject("poolKey", this.gameObject);
     }
     private void OnDisable()
     {
@@ -77,7 +96,7 @@ public class Arrow : MonoBehaviour
     {
         if (Scene.name == "LobbyScene" || Scene.name == "MainScene")
         {
-            ObjectPoolManager.instance.ReturnObject("Arrow", this.gameObject);
+            ObjectPoolManager.instance.ReturnObject("poolKey", this.gameObject);
         }
     }
 }
